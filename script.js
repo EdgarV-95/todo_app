@@ -6,15 +6,23 @@ const CreateTodo = (title, description, dueDate, priority) => {
 
 const addNewTodo = (element) => {
     toDoArr.push(element)
-    console.log(toDoArr)
-    document.querySelector('.todo-list').innerHTML =
-    `
-    ${toDoArr[0].title}
-    ${toDoArr[0].description}
-    ${toDoArr[0].dueDate}
-    ${toDoArr[0].priority}
-    `
+    createNewTodoElement();
 };
+
+const createNewTodoElement = () => {
+    const newEl = document.createElement('div')
+    toDoArr.forEach(el => {
+        newEl.classList.add('todo-element');
+        document.querySelector('.todo-list').appendChild(el);
+        document.querySelector('.todo-element').innerHTML =
+        `
+        ${el.title} 
+        ${el.description}
+        ${el.dueDate}
+        ${el.priority}
+        `
+    })
+}
 
 document.querySelector('.add-new').addEventListener('click', () => {
     const fill = document.createElement('div')
