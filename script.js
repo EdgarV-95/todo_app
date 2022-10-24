@@ -20,7 +20,7 @@ addNewBtn.addEventListener('click', () => {
     <p>Desc: <input type="text" id="desc" name="desc"></p>
     <p>Deadline: <input type="text" id="dueDate" name="dueDate"></p>
     <p>Priority: <input type="text" id="priority" name="priority"></p>
-    <button class="submit-btn">Add Entry</button>
+    <button class="submit-btn">Submit Entry</button>
     `
     container.appendChild(createEntryDiv);
 
