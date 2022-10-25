@@ -1,0 +1,63 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+header {
+    background-color: rgb(50, 42, 42);
+    height: 15vh;
+    width: 100%;
+    padding-left: 10vw;
+    display: flex;
+    align-items: center;
+    font-size: 2.5rem;
+    color: white;
+}
+
+main {
+    display: flex;
+}
+
+.side-bar {
+    background-color: gray;
+    height: 80vh;
+    width: 30%;
+    padding-top: 5vh;
+    display: flex;
+    flex-direction: column;
+    gap: 10vh;
+    font-size: 1.2rem;
+}
+
+.options,
+.profiles {
+    padding-left: 4vw;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5vh;
+}
+
+.profiles > p {
+    font-size: 1.85rem;
+    font-weight: bold;
+}
+
+.profiles > .button {
+    padding-top: 2.5vh;
+}
+
+.container {
+    width: 100%;
+    padding-top: 5vh;
+    padding-left: 12.5vw;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1vh;
+}
+
+.container > p {
+    font-size: 1.85rem;
+    font-weight: bold;
+    padding-bottom: 3vh;
+}
