@@ -21,7 +21,7 @@ main {
 .side-bar {
     background-color: gray;
     height: 80vh;
-    width: 30vw;
+    width: 20vw;
     padding-top: 5vh;
     display: flex;
     flex-direction: column;
@@ -32,14 +32,14 @@ main {
 .options,
 .profiles {
     padding-left: 4vw;
-    padding-right: 8vw;
+    padding-right: 5vw;
     display: flex;
     flex-direction: column;
     gap: 2.5vh;
 }
 
 .profiles {
-    padding-right: 5vw;
+    padding-right: 2vw;
 }
 
 .profiles > p {
@@ -64,7 +64,7 @@ main {
 }
 
 .container {
-    width: 70vw;
+    width: 80vw;
     padding-top: 5vh;
     padding-left: 12.5vw;
     display: flex;
@@ -89,7 +89,7 @@ main {
     background-color: rgb(50, 42, 42);
     border-radius: 4vh;
     color: white;
-    padding: 3.5vh;
+    padding: 2vh;
     display: flex;
     flex-direction: column;
     gap: 2vh;
@@ -103,15 +103,15 @@ main {
 
 input {
     width: 35vw;
-    height: 5vh;
+    height: 3vh;
 }
 
 .submit-btn {
     background-color: brown;
     border: 2px solid red;
     border-radius: 4vh;
-    padding-top: 1.75vh;
-    padding-bottom: 1.75vh;
-    margin: 2vh 11vw 0 11vw;
+    padding-top: 1.2vh;
+    padding-bottom: 1.2vh;
+    margin: 1vh 11vw 0 11vw;
     text-align: center;
 }
