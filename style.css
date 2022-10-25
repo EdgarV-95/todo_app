@@ -32,9 +32,14 @@ main {
 .options,
 .profiles {
     padding-left: 4vw;
+    padding-right: 8vw;
     display: flex;
     flex-direction: column;
     gap: 2.5vh;
+}
+
+.profiles {
+    padding-right: 5vw;
 }
 
 .profiles > p {
@@ -44,6 +49,18 @@ main {
 
 .profiles > .button {
     padding-top: 2.5vh;
+}
+
+.inbox, .today, .week {
+    display: flex;
+    gap: 1vw;
+    cursor: pointer;
+}
+
+.add-profile, .add-entry {
+    display: flex;
+    gap: 0.5vw;
+    cursor: pointer;
 }
 
 .container {
@@ -60,4 +77,41 @@ main {
     font-size: 1.85rem;
     font-weight: bold;
     padding-bottom: 3vh;
+}
+
+.add-entry {
+    font-size: 1.2rem;
+}
+
+/* FORM */
+
+.entry {
+    background-color: rgb(50, 42, 42);
+    border-radius: 4vh;
+    color: white;
+    padding: 3.5vh;
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+}
+
+.title-div, .desc-div, .date-div {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2vh;
+}
+
+input {
+    width: 35vw;
+    height: 5vh;
+}
+
+.submit-btn {
+    background-color: brown;
+    border: 2px solid red;
+    border-radius: 4vh;
+    padding-top: 1.75vh;
+    padding-bottom: 1.75vh;
+    margin: 2vh 11vw 0 11vw;
+    text-align: center;
 }

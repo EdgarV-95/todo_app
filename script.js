@@ -2,13 +2,13 @@
 const database = [];
 
 // Factory function for creating entries and their properties
-const CreateEntry = (title, description, dueDate, priority) => {
-    return { title, description, dueDate, priority };
+const CreateEntry = (title, description, dueDate) => {
+    return { title, description, dueDate };
 };
 
 // Query selectors
 const container = document.querySelector('.container');
-const addNewBtn = document.querySelector('.add-new');
+const addNewBtn = document.querySelector('.add-entry');
 
 // Form to add new entries to the database and UI
 addNewBtn.addEventListener('click', () => {
@@ -16,13 +16,16 @@ addNewBtn.addEventListener('click', () => {
     createEntryDiv.classList.add('entry');
     createEntryDiv.setAttribute('id', 'entry');
     createEntryDiv.innerHTML =
-    `<p>Title: <input type="text" id="title" name="title"></p>
-    <p>Desc: <input type="text" id="desc" name="desc"></p>
-    <p>Deadline: <input type="text" id="dueDate" name="dueDate"></p>
-    <p>Priority: <input type="text" id="priority" name="priority"></p>
-    <button class="submit-btn">Submit Entry</button>
+    `<div class="title-div">
+    <p>Title: </p>
+    <input type="text" id="title" name="title">
+    </div>
+    <div class="desc-div"><p>Description: </p><input type="text" id="desc" name="desc"></div>
+    <div class="date-div"><p>Date: </p><input type="text" id="dueDate" name="dueDate"></div>
+    <div class="submit-btn">Submit Entry</div>
     `
-    container.appendChild(createEntryDiv);
+    // container.appendChild(createEntryDiv);
+    document.querySelector('.test').before(createEntryDiv)
 
     updateEntryList();
 });
@@ -34,9 +37,8 @@ const updateEntryList = () => {
         const title = document.querySelector('#title').value;
         const desc = document.querySelector('#desc').value;
         const dueDate = document.querySelector('#dueDate').value;
-        const priority = document.querySelector('#priority').value;
 
-        const newEntry = CreateEntry(title, desc, dueDate, priority);
+        const newEntry = CreateEntry(title, desc, dueDate);
 
         // Update Database
         database.push(newEntry);
@@ -52,7 +54,6 @@ const updateEntryList = () => {
             ${database[database.length-1].title}
             ${database[database.length-1].description}
             ${database[database.length-1].dueDate}
-            ${database[database.length-1].priority}
             `
         })();
         
