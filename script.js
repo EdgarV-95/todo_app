@@ -12,6 +12,14 @@ const addNewBtn = document.querySelector('.add-entry');
 
 // Form to add new entries to the database and UI
 addNewBtn.addEventListener('click', () => {
+
+
+    document.querySelector('.side-bar').style.opacity = '0.2';
+    document.querySelector('.add-entry').style.opacity = '0.2';
+    document.querySelector('.container-title').style.opacity = '0.2';
+    document.querySelector('.todo-list').style.opacity = '0.2';
+
+
     const createEntryDiv = document.createElement('div');
     createEntryDiv.classList.add('entry');
     createEntryDiv.setAttribute('id', 'entry');
@@ -25,8 +33,7 @@ addNewBtn.addEventListener('click', () => {
     <div class="submit-btn">Submit Entry</div>
     `
     // container.appendChild(createEntryDiv);
-    document.querySelector('.test').before(createEntryDiv)
-
+    document.querySelector('.test').before(createEntryDiv);
     updateEntryList();
 });
 
@@ -61,6 +68,11 @@ const updateEntryList = () => {
         removeForm = (() => {
             document.querySelector('.entry').remove();
         })();
+
+        document.querySelector('.side-bar').style.opacity = '1';
+        document.querySelector('.add-entry').style.opacity = '1';
+        document.querySelector('.container-title').style.opacity = '1';
+        document.querySelector('.todo-list').style.opacity = '1';
     });
 };
 
