@@ -1,10 +1,16 @@
+:root {
+    --theme-color: #01848f;
+    --side-color: #e6e7e8;
+    --submit-color: #373737;
+}
+
 * {
     padding: 0;
     margin: 0;
 }
 
 header {
-    background-color: rgb(50, 42, 42);
+    background-color: var(--theme-color);
     height: 15vh;
     width: 100%;
     padding-left: 10vw;
@@ -19,9 +25,9 @@ main {
 }
 
 .side-bar {
-    background-color: gray;
+    background-color: var(--side-color);
     height: 80vh;
-    width: 20vw;
+    width: 25vw;
     padding-top: 5vh;
     display: flex;
     flex-direction: column;
@@ -32,7 +38,7 @@ main {
 .options,
 .profiles {
     padding-left: 4vw;
-    padding-right: 5vw;
+    padding-right: 9.5vw;
     display: flex;
     flex-direction: column;
     gap: 2.5vh;
@@ -63,8 +69,12 @@ main {
     cursor: pointer;
 }
 
+.add-profile {
+    margin-right: 4.2vw;
+}
+
 .container {
-    width: 80vw;
+    width: 75vw;
     padding-top: 5vh;
     padding-left: 12.5vw;
     display: flex;
@@ -86,7 +96,7 @@ main {
 /* FORM */
 
 .entry {
-    background-color: rgb(50, 42, 42);
+    background-color: var(--theme-color);
     border-radius: 4vh;
     color: white;
     padding: 2vh;
@@ -107,11 +117,12 @@ input {
 }
 
 .submit-btn {
-    background-color: brown;
-    border: 2px solid red;
+    background-color: var(--submit-color);
+    border: none;
     border-radius: 4vh;
     padding-top: 1.2vh;
     padding-bottom: 1.2vh;
     margin: 1vh 11vw 0 11vw;
     text-align: center;
+    cursor: pointer;
 }
