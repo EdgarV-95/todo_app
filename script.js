@@ -22,7 +22,7 @@ addNewBtn.addEventListener('click', () => {
     createEntryDiv.innerHTML = `
     <div class="modal-header">
         <h3 class="modal-title">New Entry</h3>
-        <button class="modal-close">X</button>
+        <span class='material-icons modal-close'>close</span>
     </div>
     <div class="modal-body">
         <div class="left-side">
@@ -38,7 +38,8 @@ addNewBtn.addEventListener('click', () => {
         <div class="right-side">
             <div class="date-div">
                 <label for="dueDate">Date: </label>
-                <input type="text" class="custom-select" id="dueDate" name="dueDate"></div>
+                <input type="date" id="dueDate" name="dueDate" value="2022-10-27" min="2022-10-27" max="2023-12-31">
+            </div>
             <div class="priority-div">
                 <label for="taskPriority">Priority: </label>
                 <select class="custom-select" id="taskPriority" required="">
@@ -61,7 +62,7 @@ addNewBtn.addEventListener('click', () => {
     </div>`
 
     container.prepend(createEntryDiv);
-
+    closeModal();
     updateEntryList();
 });
 
@@ -108,15 +109,16 @@ const addNewEntryForm = () => {
     newEntry.setAttribute('data-id', database.length-1);
     document.querySelector('.todo-list').appendChild(newEntry);
     document.body.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').innerHTML = `
-    <div class="todo-title">${database[database.length-1].title}
-        <div class="todo-icons">
-            <div class="todo-edit"><span class="material-icons">edit</span></div>
-            <div class="todo-priority"><span class="material-icons">flag</span></div>
-            <div class="todo-delete"><span class="material-icons">delete</span></div>
-        </div>
+    <div class="todo-title">${database[database.length-1].title}</div>
+    <div class="todo-icons">
+        <div class="todo-date">${database[database.length-1].dueDate}</div>
+        <div class="todo-edit"><span class="material-icons edit">edit</span></div>
+        <div class="todo-priority"><span class="material-icons flag${database.length-1}">flag</span></div>
+        <div class="todo-delete"><span class="material-icons delete">delete</span></div>
     </div>
     `
-    updatePriority(database[database.length-1].priority);
+    updatePriority(database[database.length-1].priority)
+    deleteEntry();
 };
 
 const removeForm = () => {
@@ -127,12 +129,35 @@ const updatePriority = (arg) => {
     switch(arg) {
         case 'Low':
             document.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').style.borderLeft = "5px solid green";
+            document.querySelector('.flag' + (database.length-1)).style.color = "green";
             break;
         case 'Medium':
             document.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').style.borderLeft = "5px solid orange";
+            document.querySelector('.flag' + (database.length-1)).style.color = "orange";
             break;
         case 'High':
             document.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').style.borderLeft = "5px solid red";
+            document.querySelector('.flag' + (database.length-1)).style.color = "red";
             break;
       }
+}
+
+const closeModal = () => {
+    const close = document.querySelector('.close')
+    const modalX = document.querySelector('.modal-close')
+    close.addEventListener('click', closeModal)
+    modalX.addEventListener('click', closeModal)
+
+    function closeModal() {
+        console.log('test')
+        document.querySelector('.entry').remove()
+        increaseOpacity();
+    }
+}
+
+const deleteEntry = () => {
+    const del = document.querySelector('.delete')
+    del.addEventListener('click', (e) => {
+        console.log(e)
+    })
 }

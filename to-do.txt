@@ -1,12 +1,14 @@
 Form field:
-Make description field bigger
-Add date picker (use an api maybe?)
-Add priority picker
+Make description field bigger -- DONE
+Add date picker -- DONE
+Add priority picker -- DONE
+Add X, Close btn and click away functionality -- DONE
+Add required fields -- LATER
 
 General:
-Add deadline date to the entry list
-Add priority picker functionality
--- Change the left border color based on what was selected in the form
+Add deadline date to the entry list --DONE
+Add priority picker functionality -- DONE
+-- Change the left border color based on what was selected in the form -- DONE
 Clicking on the entry will show the description underneath
 Add function to edit entry
 Clicking on delete will remove the entry from the UI and DB
