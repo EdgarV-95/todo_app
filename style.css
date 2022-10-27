@@ -50,11 +50,6 @@ main {
     padding-right: 2vw;
 }
 
-.profiles > p {
-    font-size: 1.85rem;
-    font-weight: bold;
-}
-
 .profiles > .button {
     padding-top: 2.5vh;
 }
@@ -92,7 +87,7 @@ span, p {
 }
 
 .add-entry {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     padding-right: 58vw;
 }
 
