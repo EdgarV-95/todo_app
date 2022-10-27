@@ -20,11 +20,29 @@ addNewBtn.addEventListener('click', () => {
     createEntryDiv.classList.add('entry');
     createEntryDiv.setAttribute('id', 'entry');
     createEntryDiv.innerHTML = `
-    <textarea class="title-div" id="title" name="title" placeholder="Title: "></textarea>
-    <textarea class="desc-div" id="desc" name="desc" placeholder="Description: "></textarea>
-    <div class="date-div"><p>Date: </p><input type="text" id="dueDate" name="dueDate"></div>
-    <div class="submit-btn">Submit Entry</div>
-    `
+    <div class="title-form"><h5 id="model-Title">New Entry</h5></div>
+    <div class="left-side-form">
+        <textarea class="title-div" id="title" name="title" placeholder="Title:"></textarea>
+        <textarea class="desc-div" id="desc" name="desc" placeholder="Description:"></textarea>
+    </div>
+    <div class="right-side-form">
+        <div class="date-div">Date: <input type="text" id="dueDate" name="dueDate"></div>
+        <div class="priority-div">
+            <label for="taskPriority">Priority: </label>
+            <select class="custom-select" id="taskPriority" required="">
+                <option value="low" selected="">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+        </div>
+        <div class="project-div">
+            <label for="taskProject">Profile: </label>
+            <select class="custom-select" id="taskProject" required=""><option data-newtasktargetproject="_elx98r9i0">Inbox</option></select>
+        </div>
+        <div class="close-btn">Close></div>
+        <div class="submit-btn">Submit Entry</div>
+    </div>`
+
     container.prepend(createEntryDiv);
 
     updateEntryList();
