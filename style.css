@@ -9,10 +9,6 @@
     margin: 0;
 }
 
-/* body {
-    overflow: hidden;
-} */
-
 header {
     background-color: var(--theme-color);
     height: 15vh;
@@ -34,7 +30,7 @@ main {
     background-color: var(--side-color);
     box-shadow: 0.5px 0px 5px black;
     height: 80vh;
-    width: 14.5vw;
+    width: 15vw;
     padding-top: 5vh;
     display: flex;
     flex-direction: column;
@@ -68,14 +64,13 @@ main {
     gap: 0.5vw;
 }
 
-span, .inbox > p, .today > p, .week > p {
+span, p {
     cursor: pointer;
 }
 
 .add-profile, .add-entry {
     display: flex;
     gap: 0.5vw;
-    cursor: pointer;
 }
 
 /* CONTAINER */
@@ -89,7 +84,7 @@ span, .inbox > p, .today > p, .week > p {
     gap: 1vh;
 }
 
-.container > p {
+.container-header > h2 {
     font-size: 1.85rem;
     font-weight: bold;
     padding-bottom: 3vh;
@@ -111,6 +106,10 @@ span, .inbox > p, .today > p, .week > p {
     display: flex;
     flex-direction: column;
     gap: 2vh;
+    position: absolute;
+    top: 32.5%;
+    left: 32.5%;
+    z-index: 1;
 }
 
 input {
@@ -129,28 +128,23 @@ input {
     cursor: pointer;
 }
 
-/* Entry display */
+/* Entry look*/
 
 .todo-element {
     background-color: var(--side-color);
     border-left: 5px solid red;
     width: 40vw;
-    margin-right: 20vw;
     margin-top: 2vh;
-    padding: 1.2vh 0.5vw 1.2vh 0.5vw;
-    display: flex;
-    gap: 2vw;
-    flex-wrap: wrap;
+    padding: 1.5vh 1vw 0.5vh 1.5vw;
 }
 
 .todo-title {
-    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    gap: 2vw;
 }
 
-.todo-desc {
-    border: 1px solid yellow;
-}
-
-.todo-dueDate {
-    border: 1px solid green;
+.todo-icons {
+    display: flex;
+    gap: 1vw
 }

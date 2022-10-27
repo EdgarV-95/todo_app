@@ -25,7 +25,7 @@ addNewBtn.addEventListener('click', () => {
     <div class="date-div"><p>Date: </p><input type="text" id="dueDate" name="dueDate"></div>
     <div class="submit-btn">Submit Entry</div>
     `
-    container.appendChild(createEntryDiv);
+    container.prepend(createEntryDiv);
 
     updateEntryList();
 });
@@ -57,16 +57,12 @@ const updateEntryList = () => {
 
 const lowerOpacity = () => {
     document.querySelector('.side-bar').style.opacity = '0.2';
-    document.querySelector('.add-entry').style.opacity = '0.2';
-    document.querySelector('.container-title').style.opacity = '0.2';
-    document.querySelector('.todo-list').style.opacity = '0.2';
+    document.querySelector('.container-header').style.opacity = '0.2';
 }
 
 const increaseOpacity = () => {
     document.querySelector('.side-bar').style.opacity = '1';
-    document.querySelector('.add-entry').style.opacity = '1';
-    document.querySelector('.container-title').style.opacity = '1';
-    document.querySelector('.todo-list').style.opacity = '1';
+    document.querySelector('.container-header').style.opacity = '1';
 }
 
 const addNewEntryForm = () => {
@@ -74,18 +70,17 @@ const addNewEntryForm = () => {
     newEntry.classList.add('todo-element');
     newEntry.setAttribute('data-id', database.length-1);
     document.querySelector('.todo-list').appendChild(newEntry);
-    document.body.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').innerHTML =
-    `<div class="todo-title">${database[database.length-1].title}</div>
-    <div class="todo-desc">${database[database.length-1].description}</div>
-    <div class="todo-dueDate">${database[database.length-1].dueDate}</div>
+    document.body.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').innerHTML = `
+    <div class="todo-title">${database[database.length-1].title}
+        <div class="todo-icons">
+            <div class="todo-edit"><span class="material-icons">edit</span></div>
+            <div class="todo-priority"><span class="material-icons">flag</span></div>
+            <div class="todo-delete"><span class="material-icons">delete</span></div>
+        </div>
+    </div>
     `
 };
 
 const removeForm = () => {
     document.querySelector('.entry').remove();
 };
-
-// document.querySelector('.test').addEventListener('click', () => {
-//     console.log(database)
-//     console.log(document.querySelectorAll('.todo-element'))
-// })
