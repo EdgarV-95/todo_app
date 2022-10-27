@@ -1,6 +1,6 @@
 :root {
     --theme-color: #01848f;
-    --side-color: #e6e7e8;
+    --side-color: rgb(247,247,247);
     --submit-color: #373737;
 }
 
@@ -8,6 +8,10 @@
     padding: 0;
     margin: 0;
 }
+
+/* body {
+    overflow: hidden;
+} */
 
 header {
     background-color: var(--theme-color);
@@ -24,10 +28,13 @@ main {
     display: flex;
 }
 
+/* SIDE-BAR */
+
 .side-bar {
     background-color: var(--side-color);
+    box-shadow: 0.5px 0px 5px black;
     height: 80vh;
-    width: 25vw;
+    width: 14.5vw;
     padding-top: 5vh;
     display: flex;
     flex-direction: column;
@@ -37,8 +44,7 @@ main {
 
 .options,
 .profiles {
-    padding-left: 4vw;
-    padding-right: 9.5vw;
+    padding-left: 2vw;
     display: flex;
     flex-direction: column;
     gap: 2.5vh;
@@ -59,7 +65,10 @@ main {
 
 .inbox, .today, .week {
     display: flex;
-    gap: 1vw;
+    gap: 0.5vw;
+}
+
+span, .inbox > p, .today > p, .week > p {
     cursor: pointer;
 }
 
@@ -69,17 +78,14 @@ main {
     cursor: pointer;
 }
 
-.add-profile {
-    margin-right: 4.2vw;
-}
+/* CONTAINER */
 
 .container {
-    width: 75vw;
+    width: 100%;
     padding-top: 5vh;
-    padding-left: 12.5vw;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 1vh;
 }
 
@@ -87,10 +93,12 @@ main {
     font-size: 1.85rem;
     font-weight: bold;
     padding-bottom: 3vh;
+    padding-right: 60vw;
 }
 
 .add-entry {
     font-size: 1.2rem;
+    padding-right: 58vw;
 }
 
 /* FORM */
@@ -103,12 +111,6 @@ main {
     display: flex;
     flex-direction: column;
     gap: 2vh;
-}
-
-.title-div, .desc-div, .date-div {
-    display: flex;
-    flex-direction: column;
-    gap: 1.2vh;
 }
 
 input {
@@ -125,4 +127,30 @@ input {
     margin: 1vh 11vw 0 11vw;
     text-align: center;
     cursor: pointer;
+}
+
+/* Entry display */
+
+.todo-element {
+    background-color: var(--side-color);
+    border-left: 5px solid red;
+    width: 40vw;
+    margin-right: 20vw;
+    margin-top: 2vh;
+    padding: 1.2vh 0.5vw 1.2vh 0.5vw;
+    display: flex;
+    gap: 2vw;
+    flex-wrap: wrap;
+}
+
+.todo-title {
+    border: 1px solid red;
+}
+
+.todo-desc {
+    border: 1px solid yellow;
+}
+
+.todo-dueDate {
+    border: 1px solid green;
 }
