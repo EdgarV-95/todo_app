@@ -118,7 +118,7 @@ const addNewEntryForm = () => {
     </div>
     `
     updatePriority(database[database.length-1].priority)
-    deleteEntry();
+    deleteFaszom();
 };
 
 const removeForm = () => {
@@ -149,15 +149,19 @@ const closeModal = () => {
     modalX.addEventListener('click', closeModal)
 
     function closeModal() {
-        console.log('test')
         document.querySelector('.entry').remove()
         increaseOpacity();
     }
 }
 
-const deleteEntry = () => {
-    const del = document.querySelector('.delete')
-    del.addEventListener('click', (e) => {
-        console.log(e)
+const deleteFaszom = () => {
+    document.querySelector('.delete').addEventListener('click', (e) => {
+        const clickedDatasetID = e.target.parentElement.parentElement.parentElement.dataset.id
+        if (e.target.parentElement.parentElement.parentElement.dataset.id === clickedDatasetID) {
+            // Removes element from DB
+            // database.splice(clickedDatasetID)
+            // Removes element from UI
+            e.target.parentElement.parentElement.parentElement.remove()
+        }
     })
 }
