@@ -59,9 +59,10 @@ addNewBtn.addEventListener('click', () => {
     <div class="form-buttons">
         <div class="close btn">Close</div>
         <div class="submit btn">Submit Entry</div>
-    </div>`;
+    </div>`
 
     container.prepend(createEntryDiv);
+    closeModal();
     updateEntryList();
 });
 
@@ -82,13 +83,13 @@ const updateEntryList = () => {
         database.push(newEntry);
 
         // Update Display
-        addNewEntryForm();
+        addNewEntryForm()
 
         // Hide form after submit is clicked
-        removeForm();
+        removeForm()
 
         // Returns opacity of the background back to normal after form is closed
-        increaseOpacity();
+        increaseOpacity()
     });
 };
 
@@ -114,8 +115,10 @@ const addNewEntryForm = () => {
         <div class="todo-edit"><span class="material-icons edit">edit</span></div>
         <div class="todo-priority"><span class="material-icons flag${database.length-1}">flag</span></div>
         <div class="todo-delete"><span class="material-icons delete">delete</span></div>
-    </div>`;
-    updatePriority(database[database.length-1].priority);
+    </div>
+    `
+    updatePriority(database[database.length-1].priority)
+    deleteEntry();
 };
 
 const removeForm = () => {
@@ -139,29 +142,30 @@ const updatePriority = (arg) => {
       }
 }
 
-const closeForm = document.querySelector('.close');
-const exitForm = document.querySelector('.modal-close');
-closeForm.addEventListener('click', closeModal);
-exitForm.addEventListener('click', closeModal);
-
 const closeModal = () => {
-    document.querySelector('.entry').remove();
-    increaseOpacity();
-};
+    const close = document.querySelector('.close')
+    const modalX = document.querySelector('.modal-close')
+    close.addEventListener('click', closeModal)
+    modalX.addEventListener('click', closeModal)
 
-const allDeleteIcons = document.querySelectorAll('.todo-delete');
-allDeleteIcons.forEach(el => {
-    el.addEventListener('click', (e) => {
-        const clickedEl = e.target.parentElement.parentElement.parentElement;
-        // Get the dataset id value of the parent
-        const clickedID = e.target.parentElement.parentElement.parentElement.dataset.id;
-        if(database[clickedID]) {
-            console.log(database);
-            // Removes element from DB
-            database.splice(clickedID, 1);
-            // Removes element from UI
-            clickedEl.remove();
-            console.log(database);
-        };
+    function closeModal() {
+        document.querySelector('.entry').remove()
+        increaseOpacity();
+    }
+}
+
+// WHY IS IT REMOVING TWO ELEMENTS FROM THE DB?
+// Check addNewEntryForm() from line 106
+const deleteEntry = () => {
+    document.querySelectorAll('.delete').forEach(el => {
+        el.addEventListener('click', (e) => {
+            const clickedDatasetID = e.target.parentElement.parentElement.parentElement.dataset.id
+            if (e.target.parentElement.parentElement.parentElement.dataset.id === clickedDatasetID) {
+                // Removes element from DB
+                database.splice(clickedDatasetID, 1)
+                // Removes element from UI
+                e.target.parentElement.parentElement.parentElement.remove()
+            }
+        })
     })
-});
+}
