@@ -139,17 +139,20 @@ span, p {
     height: calc(1.5em + 0.25rem + 2px);
     padding: 0.375rem 0.75rem;
     resize: none;
+    border: none;
 }
 
 .taskDesc {
     width: 110%;
     height: calc(1.5em + 3.25rem + 2px);
     padding: 0.375rem 0.75rem;
+    border: none;
 }
 
 .custom-select {
     display: flex;
     flex-direction: column;
+    text-align: center;
 }
 
 .right-side {
@@ -161,6 +164,7 @@ span, p {
 input, .custom-select {
     width: 100%;
     height: calc(1.5em + 0.25rem + 2px);
+    border: none;
 }
 
 .form-buttons {
