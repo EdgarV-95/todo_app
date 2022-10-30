@@ -87,7 +87,7 @@ class UI {
         list.addEventListener('click', (e) => {
             if (e.target.classList.contains('delete')) {
                 e.target.parentNode.parentNode.parentNode.remove();
-            }
+            };
             let btnId = e.target.parentNode.parentNode.parentNode.dataset.id;
             UI.deleteElementFromDB(btnId);
         })
