@@ -25,13 +25,55 @@
                 <div class="add-profile"><span class="material-icons" style="font-size: 2.5vh; font-weight: bold;">add</span><p>Add New Profile</p></div>
             </div>
         </div>
-        <div class="container">
-            <div class="container-header">
+        <div class="main-body">
+            <div class="container">
                 <h2 class="h2-title">Inbox</h2>
                 <div class="add-entry"><span class="material-icons" style="font-size: 2.5vh; font-weight: bold;">add</span><p>Add Entry</p></div>
                 <div class="todo-list"></div>
             </div>
         </div>
     </main>
+    <div class="form off" id="form">
+        <div class="modal-header">
+            <h3 class="modal-title">New Entry</h3>
+            <span class="material-icons modal-close">close</span>
+        </div>
+        <div class="modal-body">
+            <div class="left-side">
+                <div class="form-textarea">
+                    <label for="taskTitle">Title: </label>
+                    <textarea class="taskTitle" id="title" name="taskTitle"></textarea>
+                </div>
+                <div class="form-textarea">
+                    <label for="taskDesc">Description: </label>
+                    <textarea class="taskDesc" id="desc" name="taskDesc"></textarea>
+                </div>
+            </div>
+            <div class="right-side">
+                <div class="date-div">
+                    <label for="dueDate">Date: </label>
+                    <input type="date" id="dueDate" name="dueDate" value="2022-10-27" min="2022-10-27" max="2023-12-31">
+                </div>
+                <div class="priority-div">
+                    <label for="taskPriority">Priority: </label>
+                    <select class="custom-select" id="priority" required="">
+                        <option value="Low" selected="">Low</option>
+                        <option value="Medium">Medium</option>
+                        <option value="High">High</option>
+                    </select>
+                </div>
+                <div class="project-div">
+                    <label for="taskProject">Profile: </label>
+                    <select class="custom-select" id="profile" required="">
+                        <option>Inbox</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="form-buttons">
+            <div class="close btn">Close</div>
+            <div class="submit btn">Submit Entry</div>
+        </div>
+    </div>
 </body>
 </html>

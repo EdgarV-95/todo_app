@@ -69,7 +69,7 @@ span, p {
 
 /* CONTAINER */
 
-.container {
+.main-body {
     width: 100%;
     padding-top: 5vh;
     display: flex;
@@ -78,7 +78,7 @@ span, p {
     gap: 1vh;
 }
 
-.container-header > h2 {
+.container > h2 {
     font-size: 1.85rem;
     font-weight: bold;
     padding-bottom: 3vh;
@@ -92,7 +92,11 @@ span, p {
 
 /* FORM */
 
-.entry {
+.off {
+    visibility: hidden;
+}
+
+.form {
     background-color: var(--side-color);
     border-radius: 4vh;
     color: black;
