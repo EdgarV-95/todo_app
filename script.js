@@ -9,6 +9,8 @@ const description = document.querySelector('#desc');
 const dueDate = document.querySelector('#dueDate');
 const priority = document.querySelector('#priority');
 const profile = document.querySelector('#profile');
+const x_btn = document.querySelector('.modal-close');
+const close = document.querySelector('.close');
 const submit = document.querySelector('.submit');
 
 // Database to store all objects
@@ -25,16 +27,13 @@ submit.addEventListener('click', () => {
     // First submit the values entered
     let id = Math.random() * 100000;
 
-    // If the title or description is empty then throw error
-    // Otherwise carry on adding it as an object
-    if ( !(title.value === '')) {
-        const todo = new Todo(id, title.value, description.value, dueDate.value, priority.value, profile.value);
-        console.log(todo)
-        database = [...database, todo];
-        UI.displayTask();
-        UI.clearForm();
-        UI.deleteElementFromUI();
-    } else alert('Title cannot be empty');
+    const todo = new Todo(id, title.value, description.value, dueDate.value, priority.value, profile.value);
+    console.log(todo)
+    database = [...database, todo];
+    UI.displayTask();
+    UI.clearForm();
+    UI.closeForm();
+    UI.deleteElementFromUI();
 
     // Hide form after Submit btn is pressed
     form.classList.add('off');
@@ -98,6 +97,15 @@ class UI {
     static deleteElementFromDB(id) {
         database = database.filter(item => item.id !== +id);
     };
+
+    static closeForm() {
+        console.log('test')
+        close.addEventListener('click', exit);
+        x_btn.addEventListener('click', exit);
+
+        // const exit = () => form.remove();
+        const exit = () => console.log('test');
+    }
 };
 
 // Update date to today
