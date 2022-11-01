@@ -193,7 +193,7 @@ input, .custom-select {
     background-color: var(--theme-color);
 }
 
-/* Entry look*/
+/* Task look*/
 
 .todo-element {
     background-color: var(--side-color);

@@ -9,7 +9,7 @@ const description = document.querySelector('#desc');
 const dueDate = document.querySelector('#dueDate');
 const priority = document.querySelector('#priority');
 const profile = document.querySelector('#profile');
-const x_btn = document.querySelector('.modal-close');
+const xBtn = document.querySelector('.modal-close');
 const close = document.querySelector('.close');
 const submit = document.querySelector('.submit');
 
@@ -19,6 +19,7 @@ let database = [];
 // Show form by removing .off class from .entry
 addForm.addEventListener('click', () => {
     form.classList.remove('off');
+    UI.lowerOpacity();
 });
 
 // Handle the form when submitted
@@ -28,15 +29,18 @@ submit.addEventListener('click', () => {
     let id = Math.random() * 100000;
 
     const todo = new Todo(id, title.value, description.value, dueDate.value, priority.value, profile.value);
-    console.log(todo)
     database = [...database, todo];
+
     UI.displayTask();
-    UI.clearForm();
     UI.closeForm();
     UI.deleteElementFromUI();
+});
 
-    // Hide form after Submit btn is pressed
-    form.classList.add('off');
+close.addEventListener('click', () => {
+    UI.closeForm();
+});
+xBtn.addEventListener('click', () => {
+    UI.closeForm();
 });
 
 // Todo class
@@ -63,22 +67,31 @@ class UI {
                 <div class="todo-icons">
                     <div class="todo-date">${item.dueDate}</div>
                     <div class="todo-edit"><span class="material-icons edit">edit</span></div>
-                    <div class="todo-priority"><span class="material-icons flag">flag</span></div>
                     <div class="todo-delete"><span class="material-icons delete">delete</span></div>
                 </div>
             </div>
             `
         });
+        // Remove , from the array when appearing in UI
         list.innerHTML = displayTask.join('');
+        UI.clearForm();
+        UI.updatePriority();
     };
 
-    // Clear the form values
-    static clearForm() {
-        title.value = '';
-        description.value = '';
-        dueDate.value = getCurrentDate;
-        priority.value = 'Low';
-        profile.value = 'Inbox';
+    static updatePriority() {
+        database.map(item => {
+            switch (item.priority) {
+                case 'Low':
+                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid yellow';
+                    break;
+                case 'Medium':
+                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid orange';
+                    break;
+                case 'High':
+                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid red';
+                    break;
+            };
+        });
     };
 
     // Remove elment from the UI if the event.target contains the .delete class
@@ -98,14 +111,29 @@ class UI {
         database = database.filter(item => item.id !== +id);
     };
 
-    static closeForm() {
-        console.log('test')
-        close.addEventListener('click', exit);
-        x_btn.addEventListener('click', exit);
+    // Clear the form values
+    static clearForm() {
+        title.value = '';
+        description.value = '';
+        dueDate.value = getCurrentDate;
+        priority.value = 'Low';
+        profile.value = 'Inbox';
+    };
 
-        // const exit = () => form.remove();
-        const exit = () => console.log('test');
-    }
+    static closeForm() {
+        form.classList.add('off');
+        UI.increaseOpacity();
+    };
+
+    static lowerOpacity = () => {
+        document.querySelector('.side-bar').style.opacity = '0.2';
+        document.querySelector('.main-body').style.opacity = '0.2';
+    };
+    
+    static increaseOpacity = () => {
+        document.querySelector('.side-bar').style.opacity = '1';
+        document.querySelector('.main-body').style.opacity = '1';
+    };
 };
 
 // Update date to today
