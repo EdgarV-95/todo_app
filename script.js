@@ -117,10 +117,10 @@ class UI {
 
         allTasksArr.map(task => {
             task.addEventListener('click', () => {
-                let nodeList = task.querySelectorAll('.todo-details');
-                if (nodeList.length > 1) {
-                    let test = [...document.querySelectorAll(`.todo-details[data-id="${task.dataset.id}"]`)]
-                    test.map(el => el.remove());
+                let todoDetailsList = task.querySelectorAll('.todo-details');
+                if (todoDetailsList.length > 1) {
+                    let detailsArr = [...todoDetailsList]
+                    detailsArr.map(item => item.remove());
                 };
             });
         });
