@@ -63,7 +63,7 @@ class UI {
     static displayTask() {
         let displayTask = database.map(item => {
             return `
-            <div class="todo-task-container">
+            <div class="todo-task-container" data-id=${item.id}>
                 <div class="todo-element" data-id=${item.id}>
                 <div class="todo-title">${item.title}</div>
                 <div class="todo-icons">
@@ -103,6 +103,7 @@ class UI {
             task.addEventListener('click', (e) => {
                 const details = document.createElement('div');
                 details.classList.add('todo-details');
+                details.setAttribute('data-id', e.target.dataset.id)
                 task.append(details);
 
                 database = database.filter(item => item.id !== e.target.dataset.id);
@@ -111,6 +112,16 @@ class UI {
                         details.innerHTML = `${el.description}`;
                     };
                 });
+            });
+        });
+
+        allTasksArr.map(task => {
+            task.addEventListener('click', () => {
+                let nodeList = task.querySelectorAll('.todo-details');
+                if (nodeList.length > 1) {
+                    let test = document.querySelectorAll(`.todo-details[data-id="${task.dataset.id}"]`);
+                    test.forEach(el => el.remove());
+                };
             });
         });
     };
