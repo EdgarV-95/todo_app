@@ -119,8 +119,8 @@ class UI {
             task.addEventListener('click', () => {
                 let nodeList = task.querySelectorAll('.todo-details');
                 if (nodeList.length > 1) {
-                    let test = document.querySelectorAll(`.todo-details[data-id="${task.dataset.id}"]`);
-                    test.forEach(el => el.remove());
+                    let test = [...document.querySelectorAll(`.todo-details[data-id="${task.dataset.id}"]`)]
+                    test.map(el => el.remove());
                 };
             });
         });
