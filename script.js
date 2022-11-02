@@ -33,6 +33,7 @@ submit.addEventListener('click', () => {
 
     UI.displayTask();
     UI.closeForm();
+    UI.showTaskDescription();
     UI.deleteElementFromUI();
 });
 
@@ -62,12 +63,14 @@ class UI {
     static displayTask() {
         let displayTask = database.map(item => {
             return `
-            <div class="todo-element" data-id=${item.id}>
+            <div class="todo-task-container">
+                <div class="todo-element" data-id=${item.id}>
                 <div class="todo-title">${item.title}</div>
                 <div class="todo-icons">
                     <div class="todo-date">${item.dueDate}</div>
                     <div class="todo-edit"><span class="material-icons edit">edit</span></div>
                     <div class="todo-delete"><span class="material-icons delete">delete</span></div>
+                </div>
                 </div>
             </div>
             `
@@ -91,6 +94,24 @@ class UI {
                     document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid red';
                     break;
             };
+        });
+    };
+
+    static showTaskDescription() {
+        const allTasksArr = Array.from(document.querySelectorAll('.todo-task-container'));
+        allTasksArr.map(task => {
+            task.addEventListener('click', (e) => {
+                const details = document.createElement('div');
+                details.classList.add('todo-details');
+                task.append(details);
+
+                database = database.filter(item => item.id !== e.target.dataset.id);
+                database.map(el => {
+                    if(el.id === +(e.target.dataset.id)) {
+                        details.innerHTML = `${el.description}`;
+                    };
+                });
+            });
         });
     };
 
