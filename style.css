@@ -1,6 +1,7 @@
 :root {
-    --theme-color: rgb(120, 172, 120);
-    --side-color: #c3d4c3;
+    --theme-color: rgb(220,76,63);
+    --side-color: rgb(234, 234, 234);
+    --background-color: rgb(255,255,255);
 }
 
 * {
@@ -11,12 +12,12 @@
 header {
     background-color: var(--theme-color);
     height: 10vh;
-    width: 100%;
+    width: 90vw;
     padding-left: 10vw;
     display: flex;
     align-items: center;
     font-size: 1.5rem;
-    color: rgb(78, 86, 79);
+    color: black;
 }
 
 main {
@@ -70,11 +71,12 @@ span, p {
 /* CONTAINER */
 
 .main-body {
+    background-color: var(--background-color);
     width: 100%;
     padding-top: 5vh;
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row-reverse;
+    align-items: flex-start;
     gap: 1vh;
 }
 
@@ -180,23 +182,45 @@ input, .custom-select {
 }
 
 .btn {
-    border: 2px solid black;
-    padding: 2vh;
+    /* border: 2px solid black; */
+    border: none;
+    border-radius: 4vh;
+    height: 2.2vh;
+    width: 4vw;
+    text-align: center;
+    padding: 1vh;
+    font-weight: bold;
     cursor: pointer;
 }
 
-.close:hover {
+.close {
     background-color: rgb(207, 135, 135);
 }
 
+.close:hover {
+    background-color: red;
+}
+
 .submit {
-    background-color: var(--theme-color);
+    /* background-color: var(--theme-color); */
+    background-color: rgba(84, 156, 84, 0.888);
+}
+
+.submit:hover {
+    /* background-color: var(--theme-color); */
+    background-color: greenyellow;
 }
 
 /* Task look*/
 
+/* .todo-task-container {
+    display: flex;
+    flex-direction: column;
+} */
+
 .todo-element {
     background-color: var(--side-color);
+    border-radius: 4vh;
     width: 40vw;
     margin-top: 2vh;
     padding: 1.5vh 1vw 0.5vh 1.5vw;
@@ -209,4 +233,32 @@ input, .custom-select {
     display: flex;
     justify-content: space-evenly;
     gap: 1vw
+}
+
+.todo-details {
+    background-color: var(--side-color);
+    border-radius: 4vh;
+    border: 1px solid gainsboro;
+    width: 44vw;
+    margin-top: 0.5vh;
+    padding: 3vh 0 3vh 0;
+    font-size: 1.3rem;
+    display: flex;
+    justify-content: space-around;
+}
+
+.desc-left {
+    margin-left: 0.5vw;
+    margin-right: 5vw;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75vh;
+}
+
+.desc-right {
+    /* width: max-content; */
+    margin-right: 3vw;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5vh;
 }
