@@ -63,7 +63,7 @@ class UI {
     static displayTask() {
         let displayTask = database.map(item => {
             return `
-            <div class="todo-task-container">
+            <div class="todo-task-container" data-id=${item.id}>
                 <div class="todo-element" data-id=${item.id}>
                 <div class="todo-title">${item.title}</div>
                 <div class="todo-icons">
@@ -85,13 +85,13 @@ class UI {
         database.map(item => {
             switch (item.priority) {
                 case 'Low':
-                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid yellow';
+                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid rgb(64,115,214)';
                     break;
                 case 'Medium':
-                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid orange';
+                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid rgb(245,156,24)';
                     break;
                 case 'High':
-                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid red';
+                    document.querySelector(`.todo-element[data-id="${item.id}"]`).style.borderLeft = '1.5vw solid rgb(222,75,74)';
                     break;
             };
         });
@@ -114,7 +114,16 @@ class UI {
                     database = database.filter(item => item.id !== e.target.dataset.id);
                     database.map(el => {
                         if(el.id === +(e.target.dataset.id)) {
-                            details.innerHTML = `${el.description}`;
+                            details.innerHTML = `
+                            <div class="desc-left">
+                                <div class="desc-desc">Description: </div>
+                                <p class="desc-nl">${el.description}</p>
+                            </div>
+                            <div class="desc-right">
+                                <div class="desc-date">Due Date: ${el.dueDate}</div>
+                                <div class="desc-priority">Priority: ${el.priority}</div>
+                            </div>
+                            `;
                         };
                     });
                 };
@@ -126,9 +135,9 @@ class UI {
     static deleteElementFromUI() {
         list.addEventListener('click', (e) => {
             if (e.target.classList.contains('delete')) {
-                e.target.parentNode.parentNode.parentNode.remove();
+                e.target.parentNode.parentNode.parentNode.parentNode.remove();
             };
-            let btnId = e.target.parentNode.parentNode.parentNode.dataset.id;
+            let btnId = e.target.parentNode.parentNode.parentNode.parentNode.dataset.id;
             UI.deleteElementFromDB(btnId);
         })
     };

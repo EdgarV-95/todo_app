@@ -9,7 +9,7 @@ Add required fields
 General:
 Add deadline date to the task list --DONE
 Add function to edit task
-Clicking on the task will show the description underneath
+Clicking on the task will show the description underneath - DONE
 Clicking on delete will remove the entry from the UI and DB -- DONE
 
 Add new profile functionality
@@ -18,6 +18,6 @@ Add functions to sidebar options
 -- Create each page in a different module that will change the .container div
 
 Bugs:
-Disable other buttons while form is active
+Disable other buttons while form is active -- DONE
 If task is empty still show the icons at the left end -- DONE
 Make the page only show 100% width
