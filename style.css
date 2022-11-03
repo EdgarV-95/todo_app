@@ -238,7 +238,7 @@ input, .custom-select {
 .todo-details {
     background-color: var(--side-color);
     border-radius: 4vh;
-    border: 1px solid gainsboro;
+    border: 2px solid black;
     width: 44vw;
     margin-top: 0.5vh;
     padding: 3vh 0 3vh 0;
