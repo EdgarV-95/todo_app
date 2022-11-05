@@ -10,7 +10,7 @@ const dueDate = document.querySelector('#dueDate');
 const priority = document.querySelector('#priority');
 const profile = document.querySelector('#profile');
 const xBtn = document.querySelector('.modal-close');
-const close = document.querySelector('.close');
+const closeBtn = document.querySelector('.close');
 const submit = document.querySelector('.submit');
 
 // Database to store all objects
@@ -43,7 +43,7 @@ submit.addEventListener('click', () => {
   UI.deleteElementFromUI();
 });
 
-close.addEventListener('click', () => {
+closeBtn.addEventListener('click', () => {
   UI.closeForm();
 });
 xBtn.addEventListener('click', () => {
