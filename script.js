@@ -41,7 +41,8 @@ submit.addEventListener('click', () => {
   UI.displayTask();
   UI.closeForm();
   UI.showTaskDescription();
-  UI.editElementFromUI();
+  UI.editIcon();
+  // UI.editElementFromUI();
   UI.deleteElementFromUI();
 });
 
@@ -71,14 +72,14 @@ class UI {
     let displayTask = database.map((item) => {
       return `
             <div class="todo-task-container" data-id=${item.id}>
-                <div class="todo-element" data-id=${item.id}>
+              <div class="todo-element" data-id=${item.id}>
                 <div class="todo-title">${item.title}</div>
                 <div class="todo-icons">
                     <div class="todo-date">${item.dueDate}</div>
                     <div class="todo-edit"><span class="material-icons edit">edit</span></div>
                     <div class="todo-delete"><span class="material-icons delete">delete</span></div>
                 </div>
-                </div>
+              </div>
             </div>
             `;
     });
@@ -116,20 +117,28 @@ class UI {
     );
     allTasksArr.map((task) => {
       task.addEventListener('click', (e) => {
-        let todoDetailsList = task.querySelectorAll('.todo-details');
+        let todoDetailsList =
+          task.parentElement.parentElement.querySelectorAll(
+            '.todo-details'
+          );
         if (todoDetailsList.length > 0) {
           let detailsArr = [...todoDetailsList];
           detailsArr.map((item) => item.remove());
         } else {
           const details = document.createElement('div');
           details.classList.add('todo-details');
-          task.append(details);
+          task.parentElement.parentElement.append(details);
 
           database = database.filter(
-            (item) => item.id !== e.target.dataset.id
+            (item) =>
+              item.id !==
+              e.target.parentElement.parentElement.dataset.id
           );
           database.map((el) => {
-            if (el.id === +e.target.dataset.id) {
+            if (
+              el.id ===
+              +e.target.parentElement.parentElement.dataset.id
+            ) {
               details.innerHTML = `
                             <div class="desc-left">
                                 <div class="desc-desc">Description: </div>
@@ -147,49 +156,69 @@ class UI {
     });
   }
 
-  // Edit task
-  static editElementFromUI() {
-    const allEdits = Array.from(
-      document.querySelectorAll('.todo-edit')
-    );
-    allEdits.map((edit) => {
-      // Show update form by removing .off class from .entry
-      edit.addEventListener('click', () => {
-        update.classList.remove('off');
-        UI.lowerOpacity();
-        // Update form fields with data from the database
-        let editID = edit.parentElement.parentElement.dataset.id;
-        database = database.filter((item) => item.id === +editID);
-        console.log(database);
-        document.querySelector('#update-title').innerHTML =
-          database[0].title;
-        document.querySelector('#update-desc').innerHTML =
-          database[0].description;
-        // document.querySelector('#update-dueDate').innerHTML =
-        //   database[0].dueDate;
-        // document.querySelector('#update-priority').innerHTML =
-        //   database[0].priority.value;
-        // document.querySelector('#update-profile').innerHTML =
-        //   database[0].profile.value;
-      });
-
-      // Submit update form
-      document
-        .querySelector('#update-update')
-        .addEventListener('click', () => {
-          // select the task and update its fields
-          document.querySelector(
-            `.todo-element[data-id="${edit.id}"]`
-          );
-        });
-      // Close update form
-      document
-        .querySelector('#update-close')
-        .addEventListener('click', () => {
-          UI.closeForm();
-        });
+  // test
+  static editIcon() {
+    const allEdits = document.querySelectorAll('.todo-edit');
+    Array.from(allEdits).map((edit) => {
+      edit.addEventListener('click', () => console.log('test'));
     });
   }
+
+  // // Edit task
+  // static editElementFromUI() {
+  //   const allEdits = Array.from(
+  //     document.querySelectorAll('.todo-edit')
+  //   );
+  //   allEdits.map((edit) => {
+  //     edit.addEventListener('click', () => {
+  //       // Show update form by removing .off class from .entry
+  //       update.classList.remove('off');
+  //       UI.lowerOpacity();
+  //       // Show form fields with data from the database
+  //       let editID = edit.parentElement.parentElement.dataset.id;
+  //       let updateDatabase = [...database];
+  //       updateDatabase = updateDatabase.filter(
+  //         (item) => item.id === +editID
+  //       );
+  //       document.querySelector('#update-title').innerHTML =
+  //         updateDatabase[0].title;
+  //       document.querySelector('#update-desc').innerHTML =
+  //         updateDatabase[0].description;
+  //       document.querySelector('#update-dueDate').value =
+  //         updateDatabase[0].dueDate;
+  //       document.querySelector('#update-priority').value =
+  //         updateDatabase[0].priority;
+  //       document.querySelector('#update-profile').value =
+  //         updateDatabase[0].profile;
+  //     });
+
+  //     // Submit update form
+  //     document
+  //       .querySelector('#update-update')
+  //       .addEventListener('click', () => {
+  //         // select the task and update its fields
+  //         // Update form with new values added
+  //         const updatedTodo = new Todo(
+  //           // editID,
+  //           document.querySelector('#update-title').value,
+  //           document.querySelector('#update-desc').value,
+  //           document.querySelector('#update-dueDate').value,
+  //           document.querySelector('#update-priority').value,
+  //           document.querySelector('#update-profile').value
+  //         );
+  //         database = [...database, updatedTodo];
+  //         UI.displayTask();
+  //         UI.closeForm();
+  //       });
+
+  //     // Close update form
+  //     document
+  //       .querySelector('#update-close')
+  //       .addEventListener('click', () => {
+  //         UI.closeForm();
+  //       });
+  //   });
+  // }
 
   // Remove elment from the UI if the event.target contains the .delete class
   static deleteElementFromUI() {
