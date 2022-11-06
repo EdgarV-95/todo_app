@@ -2,6 +2,7 @@
 const list = document.querySelector('.todo-list');
 const addForm = document.querySelector('.add-entry');
 const form = document.querySelector('.form');
+const update = document.querySelector('.update');
 
 // Form elements
 const title = document.querySelector('#title');
@@ -40,6 +41,7 @@ submit.addEventListener('click', () => {
   UI.displayTask();
   UI.closeForm();
   UI.showTaskDescription();
+  UI.editElementFromUI();
   UI.deleteElementFromUI();
 });
 
@@ -110,7 +112,7 @@ class UI {
 
   static showTaskDescription() {
     const allTasksArr = Array.from(
-      document.querySelectorAll('.todo-task-container')
+      document.querySelectorAll('.todo-title')
     );
     allTasksArr.map((task) => {
       task.addEventListener('click', (e) => {
@@ -145,6 +147,50 @@ class UI {
     });
   }
 
+  // Edit task
+  static editElementFromUI() {
+    const allEdits = Array.from(
+      document.querySelectorAll('.todo-edit')
+    );
+    allEdits.map((edit) => {
+      // Show update form by removing .off class from .entry
+      edit.addEventListener('click', () => {
+        update.classList.remove('off');
+        UI.lowerOpacity();
+        // Update form fields with data from the database
+        let editID = edit.parentElement.parentElement.dataset.id;
+        database = database.filter((item) => item.id === +editID);
+        console.log(database);
+        document.querySelector('#update-title').innerHTML =
+          database[0].title;
+        document.querySelector('#update-desc').innerHTML =
+          database[0].description;
+        // document.querySelector('#update-dueDate').innerHTML =
+        //   database[0].dueDate;
+        // document.querySelector('#update-priority').innerHTML =
+        //   database[0].priority.value;
+        // document.querySelector('#update-profile').innerHTML =
+        //   database[0].profile.value;
+      });
+
+      // Submit update form
+      document
+        .querySelector('#update-update')
+        .addEventListener('click', () => {
+          // select the task and update its fields
+          document.querySelector(
+            `.todo-element[data-id="${edit.id}"]`
+          );
+        });
+      // Close update form
+      document
+        .querySelector('#update-close')
+        .addEventListener('click', () => {
+          UI.closeForm();
+        });
+    });
+  }
+
   // Remove elment from the UI if the event.target contains the .delete class
   static deleteElementFromUI() {
     list.addEventListener('click', (e) => {
@@ -175,6 +221,7 @@ class UI {
 
   static closeForm() {
     form.classList.add('off');
+    update.classList.add('off');
     UI.increaseOpacity();
   }
 
