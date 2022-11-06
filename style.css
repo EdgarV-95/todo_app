@@ -232,8 +232,13 @@ input,
   margin-top: 2vh;
   padding: 1.5vh 1vw 0.5vh 1.5vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   font-size: 1.3rem;
+}
+
+.todo-title {
+  cursor: pointer;
+  width: 20vw;
 }
 
 .todo-icons {
