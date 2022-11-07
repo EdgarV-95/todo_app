@@ -41,7 +41,6 @@ submit.addEventListener('click', () => {
   UI.displayTask();
   UI.closeForm();
   UI.showTaskDescription();
-  UI.editIcon();
   UI.deleteElementFromUI();
 });
 
@@ -151,81 +150,6 @@ class UI {
         }
       });
     });
-  }
-
-  // test
-  static editIcon() {
-    const allEdits = document.querySelectorAll('.todo-edit');
-    let editList = Array.from(allEdits);
-    for (let i = 0; i < editList.length; i++) {
-      editList[i].addEventListener('click', (e) => {
-        console.log(
-          e.target.parentElement.parentElement.parentElement.dataset
-            .id
-        );
-        console.log(
-          database[0].e.target.parentElement.parentElement
-            .parentElement.dataset.id
-        );
-      });
-      // editList.map((edit) => {
-      //   edit.addEventListener('click', (e) => {
-      //   });
-      // });
-      //   // Show form by removing .off class from .entry
-      //   edit.addEventListener('click', () => {
-      //     update.classList.remove('off');
-      //     UI.lowerOpacity();
-
-      //     // Show existing data in the form upon opening it
-      //     let editID = edit.parentElement.parentElement.dataset.id;
-
-      //     let updateDatabase = [];
-      //     for (let obj of database) {
-      //       updateDatabase.push(obj);
-      //     }
-      //     updateDatabase = updateDatabase.filter(
-      //       (item) => item.id === +editID
-      //     );
-      //     document.querySelector('#update-title').innerHTML =
-      //       updateDatabase[0].title;
-      //     document.querySelector('#update-desc').innerHTML =
-      //       updateDatabase[0].description;
-      //     document.querySelector('#update-dueDate').value =
-      //       updateDatabase[0].dueDate;
-      //     document.querySelector('#update-priority').value =
-      //       updateDatabase[0].priority;
-      //     document.querySelector('#update-profile').value =
-      //       updateDatabase[0].profile;
-      //   });
-
-      //   // Handle the update form when submitted
-      //   document
-      //     .querySelector('#update-update')
-      //     .addEventListener('click', () => {
-      //       let id = Math.random() * 100000;
-
-      //       const todo = new Todo(
-      //         id,
-      //         title.value,
-      //         description.value,
-      //         dueDate.value,
-      //         priority.value,
-      //         profile.value
-      //       );
-      //       database = [...database, todo];
-      //       UI.displayTask();
-      //     });
-
-      //   // Close update form
-      //   document
-      //     .querySelector('#update-close')
-      //     .addEventListener('click', () => {
-      //       update.classList.add('off');
-      //       UI.increaseOpacity();
-      //     });
-      // });
-    }
   }
 
   // Remove elment from the UI if the event.target contains the .delete class
