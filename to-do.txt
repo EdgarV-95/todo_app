@@ -1,25 +1,23 @@
-Form field:
+Form:
 Make description field bigger -- DONE
 Add date picker -- DONE
 Add priority picker -- DONE
-Add X, Close btn and click away functionality -- DONE
-Add required fields -- LATER
+Add X and Close btn functionality -- DONE
+Change the left border color based on what was selected in the form -- DONE
+Add required fields
 
 General:
-Add deadline date to the entry list --DONE
-Add priority picker functionality -- DONE
--- Change the left border color based on what was selected in the form -- DONE
-Clicking on the entry will show the description underneath
-Add function to edit entry
-Clicking on delete will remove the entry from the UI and DB
+Add deadline date to the task list --DONE
+Add function to edit task
+Clicking on the task will show the description underneath - DONE
+Clicking on delete will remove the entry from the UI and DB -- DONE
 
 Add new profile functionality
 -- Create each page in a different module that will change the .container div
 Add functions to sidebar options
 -- Create each page in a different module that will change the .container div
 
-Bugs
-Disable other buttons while form is active
-Remove form is user clicks away
-If entry is empty still show the icons at the left end
+Bugs:
+Disable other buttons while form is active -- DONE
+If task is empty still show the icons at the left end -- DONE
 Make the page only show 100% width

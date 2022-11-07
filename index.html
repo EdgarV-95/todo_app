@@ -1,37 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
     <script src="script.js" defer></script>
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <h1>Todo List</h1>
+      <h1>Todo List</h1>
     </header>
     <main>
-        <div class="side-bar">
-            <div class="options">
-                <div class="inbox"><span class="material-icons">inbox</span><p>Inbox</p></div>
-                <div class="today"><span class="material-icons">today</span><p>Today</p></div>
-                <div class="week"><span class="material-icons">calendar_view_week</span><p>This week</p></div>
-            </div>
-            <div class="profiles">
-                <h2>Profiles</h2>
-                <div class="add-profile"><span class="material-icons" style="font-size: 2.5vh; font-weight: bold;">add</span><p>Add New Profile</p></div>
-            </div>
+      <div class="side-bar">
+        <div class="options">
+          <div class="inbox">
+            <span class="material-icons">inbox</span>
+            <p>Inbox</p>
+          </div>
+          <div class="today">
+            <span class="material-icons">today</span>
+            <p>Today</p>
+          </div>
+          <div class="week">
+            <span class="material-icons">calendar_view_week</span>
+            <p>This week</p>
+          </div>
         </div>
+        <div class="profiles">
+          <h2>Profiles</h2>
+          <div class="add-profile">
+            <span
+              class="material-icons"
+              style="font-size: 2.5vh; font-weight: bold"
+              >add</span
+            >
+            <p>Add New Profile</p>
+          </div>
+        </div>
+      </div>
+      <div class="main-body">
         <div class="container">
-            <div class="container-header">
-                <h2 class="h2-title">Inbox</h2>
-                <div class="add-entry"><span class="material-icons" style="font-size: 2.5vh; font-weight: bold;">add</span><p>Add Entry</p></div>
-                <div class="todo-list"></div>
-            </div>
+          <h2 class="h2-title">Inbox</h2>
+          <div class="add-entry">
+            <span
+              class="material-icons"
+              style="font-size: 2.5vh; font-weight: bold"
+              >add</span
+            >
+            <p>Add Entry</p>
+          </div>
+          <div class="todo-list"></div>
         </div>
+      </div>
     </main>
-</body>
+    <div class="form off" id="form">
+      <div class="modal-header">
+        <h3 class="modal-title">New Entry</h3>
+        <span class="material-icons modal-close">close</span>
+      </div>
+      <div class="modal-body">
+        <div class="left-side">
+          <div class="form-textarea">
+            <label for="taskTitle">Title: </label>
+            <textarea
+              class="taskTitle"
+              id="title"
+              name="taskTitle"
+            ></textarea>
+          </div>
+          <div class="form-textarea">
+            <label for="taskDesc">Description: </label>
+            <textarea
+              class="taskDesc"
+              id="desc"
+              name="taskDesc"
+            ></textarea>
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="date-div">
+            <label for="dueDate">Date: </label>
+            <input
+              type="date"
+              id="dueDate"
+              name="dueDate"
+              value="2022-10-27"
+              min="2022-10-27"
+              max="2023-12-31"
+            />
+          </div>
+          <div class="priority-div">
+            <label for="taskPriority">Priority: </label>
+            <select class="custom-select" id="priority" required="">
+              <option value="Low" selected="">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="project-div">
+            <label for="taskProject">Profile: </label>
+            <select class="custom-select" id="profile" required="">
+              <option>Inbox</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="form-buttons">
+        <div class="close btn">Close</div>
+        <div class="submit btn">Submit</div>
+      </div>
+    </div>
+    <div class="update off" id="update">
+      <div class="modal-header">
+        <h3 class="modal-title">Update Entry</h3>
+        <span class="material-icons modal-close">close</span>
+      </div>
+      <div class="modal-body">
+        <div class="left-side">
+          <div class="update-textarea">
+            <label for="taskTitle">Title: </label>
+            <textarea
+              class="taskTitle"
+              id="update-title"
+              name="taskTitle"
+            ></textarea>
+          </div>
+          <div class="update-textarea">
+            <label for="taskDesc">Description: </label>
+            <textarea
+              class="taskDesc"
+              id="update-desc"
+              name="taskDesc"
+            ></textarea>
+          </div>
+        </div>
+        <div class="right-side">
+          <div class="date-div">
+            <label for="dueDate">Date: </label>
+            <input
+              type="date"
+              id="update-dueDate"
+              name="dueDate"
+              min="2022-10-27"
+              max="2023-12-31"
+            />
+          </div>
+          <div class="priority-div">
+            <label for="taskPriority">Priority: </label>
+            <select
+              class="custom-select"
+              id="update-priority"
+              required=""
+            >
+              <option value="Low" selected="">Low</option>
+              <option value="Medium">Medium</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+          <div class="project-div">
+            <label for="taskProject">Profile: </label>
+            <select
+              class="custom-select"
+              id="update-profile"
+              required=""
+            >
+              <option>Inbox</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="update-buttons">
+        <div class="close btn" id="update-close">Close</div>
+        <div class="submit btn" id="update-update">Update</div>
+      </div>
+    </div>
+  </body>
 </html>

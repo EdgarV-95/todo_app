@@ -1,171 +1,279 @@
-// Stores all entries
-const database = [];
+// Main page elements
+const list = document.querySelector('.todo-list');
+const addForm = document.querySelector('.add-entry');
+const form = document.querySelector('.form');
+const update = document.querySelector('.update');
 
-// Factory function for creating entries and their properties
-const CreateEntry = (title, description, dueDate, priority, profile) => {
-    return { title, description, dueDate, priority, profile };
-};
+// Form elements
+const title = document.querySelector('#title');
+const description = document.querySelector('#desc');
+const dueDate = document.querySelector('#dueDate');
+const priority = document.querySelector('#priority');
+const profile = document.querySelector('#profile');
+const xBtn = document.querySelector('.modal-close');
+const closeBtn = document.querySelector('.close');
+const submit = document.querySelector('.submit');
 
-// Query selectors
-const container = document.querySelector('.container');
-const addNewBtn = document.querySelector('.add-entry');
+// Database to store all objects
+let database = [];
 
-// Form to add new entries to the database and UI
-addNewBtn.addEventListener('click', () => {
-    // Reduces opacity of the background while form is present
-    lowerOpacity();
-
-    // Creates form
-    const createEntryDiv = document.createElement('div');
-    createEntryDiv.classList.add('entry');
-    createEntryDiv.setAttribute('id', 'entry');
-    createEntryDiv.innerHTML = `
-    <div class="modal-header">
-        <h3 class="modal-title">New Entry</h3>
-        <span class='material-icons modal-close'>close</span>
-    </div>
-    <div class="modal-body">
-        <div class="left-side">
-            <div class="form-textarea">
-                <label for="taskTitle">Title: </label>
-                <textarea class="taskTitle" id="title" name="taskTitle"></textarea>
-            </div>
-            <div class="form-textarea">
-                <label for="taskDesc">Description: </label>
-                <textarea class="taskDesc" id="desc" name="taskDesc"></textarea>
-            </div>
-        </div>
-        <div class="right-side">
-            <div class="date-div">
-                <label for="dueDate">Date: </label>
-                <input type="date" id="dueDate" name="dueDate" value="2022-10-27" min="2022-10-27" max="2023-12-31">
-            </div>
-            <div class="priority-div">
-                <label for="taskPriority">Priority: </label>
-                <select class="custom-select" id="taskPriority" required="">
-                    <option value="Low" selected="">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
-            </div>
-            <div class="project-div">
-                <label for="taskProject">Profile: </label>
-                <select class="custom-select" id="taskProject" required="">
-                    <option>Inbox</option>
-                </select>
-            </div>
-        </div>
-    </div>
-    <div class="form-buttons">
-        <div class="close btn">Close</div>
-        <div class="submit btn">Submit Entry</div>
-    </div>`
-
-    container.prepend(createEntryDiv);
-    closeModal();
-    updateEntryList();
+// Show form by removing .off class from .entry
+addForm.addEventListener('click', () => {
+  form.classList.remove('off');
+  UI.lowerOpacity();
 });
 
-// Updates the database and UI with the form data
-const updateEntryList = () => {
-    // Get form values after "Submit" is clicked and create a new "CreateEntry" object from them
-    const submitBtn = document.querySelector('.submit');
-    submitBtn.addEventListener('click', () => {
-        const title = document.querySelector('#title').value;
-        const desc = document.querySelector('#desc').value;
-        const dueDate = document.querySelector('#dueDate').value;
-        const priority = document.querySelector('#taskPriority').value;
-        const profile = document.querySelector('#taskProject').value;
+// Handle the form when submitted
+submit.addEventListener('click', () => {
+  // First submit the values entered
+  let id = Math.random() * 100000;
 
-        const newEntry = CreateEntry(title, desc, dueDate, priority);
+  const todo = new Todo(
+    id,
+    title.value,
+    description.value,
+    dueDate.value,
+    priority.value,
+    profile.value
+  );
+  database = [...database, todo];
 
-        // Update Database
-        database.push(newEntry);
+  UI.displayTask();
+  UI.closeForm();
+  UI.showTaskDescription();
+  UI.editIcon();
+  UI.deleteElementFromUI();
+});
 
-        // Update Display
-        addNewEntryForm()
+closeBtn.addEventListener('click', () => {
+  UI.closeForm();
+});
+xBtn.addEventListener('click', () => {
+  UI.closeForm();
+});
 
-        // Hide form after submit is clicked
-        removeForm()
+// Todo class
+class Todo {
+  constructor(id, title, description, dueDate, priority, profile) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.dueDate = dueDate;
+    this.priority = priority;
+    this.profile = profile;
+  }
+}
 
-        // Returns opacity of the background back to normal after form is closed
-        increaseOpacity()
+// Class to update UI elements
+class UI {
+  // Update the UI with the newly added element
+  static displayTask() {
+    let displayTask = database.map((item) => {
+      return `
+            <div class="todo-task-container" data-id=${item.id}>
+              <div class="todo-element" data-id=${item.id}>
+                <div class="todo-title">${item.title}</div>
+                <div class="todo-icons">
+                    <div class="todo-date">${item.dueDate}</div>
+                    <div class="todo-edit"><span class="material-icons edit">edit</span></div>
+                    <div class="todo-delete"><span class="material-icons delete">delete</span></div>
+                </div>
+              </div>
+            </div>
+            `;
     });
-};
+    // Remove , from the array when appearing in UI
+    list.innerHTML = displayTask.join('');
+    UI.clearForm();
+    UI.updatePriority();
+  }
 
-const lowerOpacity = () => {
-    document.querySelector('.side-bar').style.opacity = '0.2';
-    document.querySelector('.container-header').style.opacity = '0.2';
-}
-
-const increaseOpacity = () => {
-    document.querySelector('.side-bar').style.opacity = '1';
-    document.querySelector('.container-header').style.opacity = '1';
-}
-
-const addNewEntryForm = () => {
-    const newEntry = document.createElement('div');
-    newEntry.classList.add('todo-element');
-    newEntry.setAttribute('data-id', database.length-1);
-    document.querySelector('.todo-list').appendChild(newEntry);
-    document.body.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').innerHTML = `
-    <div class="todo-title">${database[database.length-1].title}</div>
-    <div class="todo-icons">
-        <div class="todo-date">${database[database.length-1].dueDate}</div>
-        <div class="todo-edit"><span class="material-icons edit">edit</span></div>
-        <div class="todo-priority"><span class="material-icons flag${database.length-1}">flag</span></div>
-        <div class="todo-delete"><span class="material-icons delete">delete</span></div>
-    </div>
-    `
-    updatePriority(database[database.length-1].priority)
-    deleteEntry();
-};
-
-const removeForm = () => {
-    document.querySelector('.entry').remove();
-};
-
-const updatePriority = (arg) => {
-    switch(arg) {
+  static updatePriority() {
+    database.map((item) => {
+      switch (item.priority) {
         case 'Low':
-            document.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').style.borderLeft = "5px solid green";
-            document.querySelector('.flag' + (database.length-1)).style.color = "green";
-            break;
+          document.querySelector(
+            `.todo-element[data-id="${item.id}"]`
+          ).style.borderLeft = '1.5vw solid rgb(64,115,214)';
+          break;
         case 'Medium':
-            document.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').style.borderLeft = "5px solid orange";
-            document.querySelector('.flag' + (database.length-1)).style.color = "orange";
-            break;
+          document.querySelector(
+            `.todo-element[data-id="${item.id}"]`
+          ).style.borderLeft = '1.5vw solid rgb(245,156,24)';
+          break;
         case 'High':
-            document.querySelector('.todo-element[data-id="' + (database.length-1) + '"]').style.borderLeft = "5px solid red";
-            document.querySelector('.flag' + (database.length-1)).style.color = "red";
-            break;
+          document.querySelector(
+            `.todo-element[data-id="${item.id}"]`
+          ).style.borderLeft = '1.5vw solid rgb(222,75,74)';
+          break;
       }
-}
+    });
+  }
 
-const closeModal = () => {
-    const close = document.querySelector('.close')
-    const modalX = document.querySelector('.modal-close')
-    close.addEventListener('click', closeModal)
-    modalX.addEventListener('click', closeModal)
+  static showTaskDescription() {
+    const allTasksArr = [...document.querySelectorAll('.todo-title')];
+    allTasksArr.map((task) => {
+      task.addEventListener('click', (e) => {
+        let todoDetailsList =
+          task.parentElement.parentElement.querySelectorAll(
+            '.todo-details'
+          );
+        if (todoDetailsList.length > 0) {
+          let detailsArr = [...todoDetailsList];
+          detailsArr.map((item) => item.remove());
+        } else {
+          const details = document.createElement('div');
+          details.classList.add('todo-details');
+          task.parentElement.parentElement.append(details);
 
-    function closeModal() {
-        document.querySelector('.entry').remove()
-        increaseOpacity();
-    }
-}
-
-// WHY IS IT REMOVING TWO ELEMENTS FROM THE DB?
-// Check addNewEntryForm() from line 106
-const deleteEntry = () => {
-    document.querySelectorAll('.delete').forEach(el => {
-        el.addEventListener('click', (e) => {
-            const clickedDatasetID = e.target.parentElement.parentElement.parentElement.dataset.id
-            if (e.target.parentElement.parentElement.parentElement.dataset.id === clickedDatasetID) {
-                // Removes element from DB
-                database.splice(clickedDatasetID, 1)
-                // Removes element from UI
-                e.target.parentElement.parentElement.parentElement.remove()
+          database = database.filter(
+            (item) =>
+              item.id !==
+              e.target.parentElement.parentElement.dataset.id
+          );
+          database.map((el) => {
+            if (
+              el.id ===
+              +e.target.parentElement.parentElement.dataset.id
+            ) {
+              details.innerHTML = `
+                            <div class="desc-left">
+                                <div class="desc-desc">Description: </div>
+                                <p class="desc-nl">${el.description}</p>
+                            </div>
+                            <div class="desc-right">
+                                <div class="desc-date">Due Date: ${el.dueDate}</div>
+                                <div class="desc-priority">Priority: ${el.priority}</div>
+                            </div>
+                            `;
             }
-        })
-    })
+          });
+        }
+      });
+    });
+  }
+
+  // test
+  static editIcon() {
+    const allEdits = document.querySelectorAll('.todo-edit');
+    let editList = Array.from(allEdits);
+    for (let i = 0; i < editList.length; i++) {
+      editList[i].addEventListener('click', (e) => {
+        console.log(
+          e.target.parentElement.parentElement.parentElement.dataset
+            .id
+        );
+        console.log(
+          database[0].e.target.parentElement.parentElement
+            .parentElement.dataset.id
+        );
+      });
+      // editList.map((edit) => {
+      //   edit.addEventListener('click', (e) => {
+      //   });
+      // });
+      //   // Show form by removing .off class from .entry
+      //   edit.addEventListener('click', () => {
+      //     update.classList.remove('off');
+      //     UI.lowerOpacity();
+
+      //     // Show existing data in the form upon opening it
+      //     let editID = edit.parentElement.parentElement.dataset.id;
+
+      //     let updateDatabase = [];
+      //     for (let obj of database) {
+      //       updateDatabase.push(obj);
+      //     }
+      //     updateDatabase = updateDatabase.filter(
+      //       (item) => item.id === +editID
+      //     );
+      //     document.querySelector('#update-title').innerHTML =
+      //       updateDatabase[0].title;
+      //     document.querySelector('#update-desc').innerHTML =
+      //       updateDatabase[0].description;
+      //     document.querySelector('#update-dueDate').value =
+      //       updateDatabase[0].dueDate;
+      //     document.querySelector('#update-priority').value =
+      //       updateDatabase[0].priority;
+      //     document.querySelector('#update-profile').value =
+      //       updateDatabase[0].profile;
+      //   });
+
+      //   // Handle the update form when submitted
+      //   document
+      //     .querySelector('#update-update')
+      //     .addEventListener('click', () => {
+      //       let id = Math.random() * 100000;
+
+      //       const todo = new Todo(
+      //         id,
+      //         title.value,
+      //         description.value,
+      //         dueDate.value,
+      //         priority.value,
+      //         profile.value
+      //       );
+      //       database = [...database, todo];
+      //       UI.displayTask();
+      //     });
+
+      //   // Close update form
+      //   document
+      //     .querySelector('#update-close')
+      //     .addEventListener('click', () => {
+      //       update.classList.add('off');
+      //       UI.increaseOpacity();
+      //     });
+      // });
+    }
+  }
+
+  // Remove elment from the UI if the event.target contains the .delete class
+  static deleteElementFromUI() {
+    list.addEventListener('click', (e) => {
+      if (e.target.classList.contains('delete')) {
+        e.target.parentNode.parentNode.parentNode.parentNode.remove();
+      }
+      let btnId =
+        e.target.parentNode.parentNode.parentNode.parentNode.dataset
+          .id;
+      UI.deleteElementFromDB(btnId);
+    });
+  }
+
+  // Removes the element from the database.
+  // Filters through the array and only returns the elements that do not have the id given as a parameter
+  static deleteElementFromDB(id) {
+    database = database.filter((item) => item.id !== +id);
+  }
+
+  // Clear the form values
+  static clearForm() {
+    title.value = '';
+    description.value = '';
+    dueDate.value = getCurrentDate;
+    priority.value = 'Low';
+    profile.value = 'Inbox';
+  }
+
+  static closeForm() {
+    form.classList.add('off');
+    update.classList.add('off');
+    UI.increaseOpacity();
+  }
+
+  static lowerOpacity = () => {
+    document.querySelector('.side-bar').style.opacity = '0.2';
+    document.querySelector('.main-body').style.opacity = '0.2';
+  };
+
+  static increaseOpacity = () => {
+    document.querySelector('.side-bar').style.opacity = '1';
+    document.querySelector('.main-body').style.opacity = '1';
+  };
 }
+
+// Update date to today
+let getCurrentDate = new Date().toISOString().split('T')[0];
+dueDate.value = getCurrentDate;
+dueDate.min = getCurrentDate;
