@@ -74,7 +74,6 @@ class UI {
                 <div class="todo-title">${item.title}</div>
                 <div class="todo-icons">
                     <div class="todo-date">${item.dueDate}</div>
-                    <div class="todo-edit"><span class="material-icons edit">edit</span></div>
                     <div class="todo-delete"><span class="material-icons delete">delete</span></div>
                 </div>
               </div>
